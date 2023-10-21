@@ -1,13 +1,16 @@
 package com.wy.yunoa.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.wy.yunoa.domain.SysUser;
+import com.wy.yunoa.model.Resp.SysUserResp;
+import com.wy.yunoa.model.domain.SysUser;
+
+import java.util.List;
 
 /**
 * @author huawei
 * @description 针对表【sys_user(用户表)】的数据库操作Service
 * @createDate 2023-10-22 00:17:51
 */
-public interface SysUserService extends IService<SysUser> {
+public interface SysUserService {
 
+    List<SysUserResp> getList();
 }

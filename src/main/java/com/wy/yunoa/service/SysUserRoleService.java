@@ -1,7 +1,7 @@
 package com.wy.yunoa.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.wy.yunoa.domain.SysUserRole;
+import com.wy.yunoa.model.domain.SysUserRole;
 
 /**
 * @author huawei

@@ -1,7 +1,7 @@
 package com.wy.yunoa.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wy.yunoa.domain.SysMenu;
+import com.wy.yunoa.model.domain.SysMenu;
 import com.wy.yunoa.mapper.SysMenuMapper;
 import com.wy.yunoa.service.SysMenuService;
 import org.springframework.stereotype.Service;

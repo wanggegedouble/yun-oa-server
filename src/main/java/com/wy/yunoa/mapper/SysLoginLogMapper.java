@@ -1,7 +1,7 @@
 package com.wy.yunoa.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wy.yunoa.domain.SysLoginLog;
+import com.wy.yunoa.model.domain.SysLoginLog;
 
 /**
 * @author huawei

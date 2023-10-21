@@ -1,7 +1,7 @@
 package com.wy.yunoa.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wy.yunoa.domain.OaProcessTemplate;
+import com.wy.yunoa.model.domain.OaProcessTemplate;
 
 /**
 * @author huawei
@@ -9,6 +9,7 @@ import com.wy.yunoa.domain.OaProcessTemplate;
 * @createDate 2023-10-22 00:17:51
 * @Entity generator.domain.OaProcessTemplate
 */
+
 public interface OaProcessTemplateMapper extends BaseMapper<OaProcessTemplate> {
 
 }

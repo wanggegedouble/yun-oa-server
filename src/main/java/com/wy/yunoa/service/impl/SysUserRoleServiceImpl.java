@@ -1,7 +1,7 @@
 package com.wy.yunoa.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wy.yunoa.domain.SysUserRole;
+import com.wy.yunoa.model.domain.SysUserRole;
 import com.wy.yunoa.mapper.SysUserRoleMapper;
 import com.wy.yunoa.service.SysUserRoleService;
 import org.springframework.stereotype.Service;

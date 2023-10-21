@@ -1,7 +1,7 @@
 package com.wy.yunoa.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wy.yunoa.domain.SysDept;
+import com.wy.yunoa.model.domain.SysDept;
 import com.wy.yunoa.mapper.SysDeptMapper;
 import com.wy.yunoa.service.SysDeptService;
 import org.springframework.stereotype.Service;

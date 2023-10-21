@@ -1,7 +1,7 @@
 package com.wy.yunoa.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wy.yunoa.domain.SysLoginLog;
+import com.wy.yunoa.model.domain.SysLoginLog;
 import com.wy.yunoa.mapper.SysLoginLogMapper;
 import com.wy.yunoa.service.SysLoginLogService;
 import org.springframework.stereotype.Service;

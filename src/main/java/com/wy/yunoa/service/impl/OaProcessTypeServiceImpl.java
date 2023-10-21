@@ -1,7 +1,7 @@
 package com.wy.yunoa.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wy.yunoa.domain.OaProcessType;
+import com.wy.yunoa.model.domain.OaProcessType;
 import com.wy.yunoa.mapper.OaProcessTypeMapper;
 import com.wy.yunoa.service.OaProcessTypeService;
 import org.springframework.stereotype.Service;

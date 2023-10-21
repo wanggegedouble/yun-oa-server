@@ -3,8 +3,10 @@ spring:
   datasource:
     username: root
     password: admin
-    url: jdbc:mysql://127.0.0.1:3306/student?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/yun_oa?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:com/wy/yunoa/mapper/*.xml

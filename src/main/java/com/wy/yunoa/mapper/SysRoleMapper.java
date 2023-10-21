@@ -1,7 +1,7 @@
 package com.wy.yunoa.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wy.yunoa.domain.SysRole;
+import com.wy.yunoa.model.domain.SysRole;
 
 /**
 * @author huawei

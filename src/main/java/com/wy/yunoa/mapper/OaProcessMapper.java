@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
 * @createDate 2023-10-22 00:17:50
 * @Entity generator.domain.OaProcess
 */
-@Mapper
 public interface OaProcessMapper extends BaseMapper<OaProcess> {
 
 }

@@ -2,72 +2,65 @@ package com.wy.yunoa.model.Resp;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 /**
  * @Author: wy
- * @CreateTime: 2023-10-22  00:32
+ * @CreateTime: 2023-10-22  16:36
  * @Description: TODO
  * @Version: 1.0
  */
 @Data
-public class SysUserResp {
+public class SysMenuResp {
     /**
-     * 会员id
+     * 编号
      */
     private Long id;
 
     /**
-     * 用户名
+     * 所属上级
      */
-    private String username;
+    private Long parentId;
 
     /**
-     * 密码
-     */
-    private String password;
-
-    /**
-     * 姓名
+     * 名称
      */
     private String name;
 
     /**
-     * 手机
+     * 类型(0:目录,1:菜单,2:按钮)
      */
-    private String phone;
+    private Integer type;
 
     /**
-     * 头像地址
+     * 路由地址
      */
-    private String headUrl;
+    private String path;
 
     /**
-     * 部门id
+     * 组件路径
      */
-    private Long deptId;
+    private String component;
 
     /**
-     * 岗位id
+     * 权限标识
      */
-    private Long postId;
+    private String perms;
 
     /**
-     * 微信openId
+     * 图标
      */
-    private String openId;
+    private String icon;
 
     /**
-     * 描述
+     * 排序
      */
-    private String description;
+    private Integer sortValue;
 
     /**
-     * 状态（1：正常 0：停用）
+     * 状态(0:禁止,1:正常)
      */
     private Integer status;
 

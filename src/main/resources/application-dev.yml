@@ -5,6 +5,8 @@ spring:
     password: admin
     url: jdbc:mysql://127.0.0.1:3306/yun_oa?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss"
 
 mybatis-plus:
   configuration:

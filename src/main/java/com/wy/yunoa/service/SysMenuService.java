@@ -1,7 +1,10 @@
 package com.wy.yunoa.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wy.yunoa.model.Resp.SysMenuResp;
 import com.wy.yunoa.model.domain.SysMenu;
+
+import java.util.List;
 
 /**
 * @author huawei
@@ -10,4 +13,5 @@ import com.wy.yunoa.model.domain.SysMenu;
 */
 public interface SysMenuService extends IService<SysMenu> {
 
+    List<SysMenuResp> getList();
 }

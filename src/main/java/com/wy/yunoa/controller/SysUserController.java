@@ -1,5 +1,6 @@
 package com.wy.yunoa.controller;
 
+import com.wy.yunoa.Result.Result;
 import com.wy.yunoa.model.Resp.SysUserResp;
 import com.wy.yunoa.service.SysUserService;
 import jakarta.annotation.Resource;
@@ -17,13 +18,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys/user")
-public class UserController {
+public class SysUserController {
 
     @Resource
     private SysUserService userService;
 
     @GetMapping("/userList")
-    private List<SysUserResp> selectList() {
-        return userService.getList();
+    private Result<List<SysUserResp>> selectList() {
+        return Result.of("用户列表",userService.getList());
     }
+
 }

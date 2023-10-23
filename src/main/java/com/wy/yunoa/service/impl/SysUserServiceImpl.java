@@ -1,6 +1,7 @@
 package com.wy.yunoa.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wy.yunoa.exception.CustomException;
 import com.wy.yunoa.model.Resp.SysUserResp;
 import com.wy.yunoa.model.domain.SysUser;
 import com.wy.yunoa.mapper.SysUserMapper;
@@ -11,7 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 /**
 * @author huawei
@@ -28,9 +29,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public List<SysUserResp> getList() {
         List<SysUser> sysUsers = userMapper.selectList(null);
-        if (Objects.isNull(sysUsers)) {
-            //TODO
-            log.info("");
+        if (Optional.ofNullable(sysUsers).isEmpty()) {
+            throw new CustomException(400,"gggg");
         }
         return sysUsers.stream().map(user -> {
             SysUserResp resp = new SysUserResp();

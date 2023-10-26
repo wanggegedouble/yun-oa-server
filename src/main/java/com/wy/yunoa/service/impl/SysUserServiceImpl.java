@@ -30,7 +30,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public List<SysUserResp> getList() {
         List<SysUser> sysUsers = userMapper.selectList(null);
         if (Optional.ofNullable(sysUsers).isEmpty()) {
-            throw new CustomException(400,"gggg");
+            throw new CustomException(400,"无数据");
         }
         return sysUsers.stream().map(user -> {
             SysUserResp resp = new SysUserResp();

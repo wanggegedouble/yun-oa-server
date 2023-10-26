@@ -1,7 +1,10 @@
 package com.wy.yunoa.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wy.yunoa.model.Resp.SysRoleResp;
 import com.wy.yunoa.model.domain.SysRole;
+
+import java.util.List;
 
 /**
 * @author huawei
@@ -10,4 +13,5 @@ import com.wy.yunoa.model.domain.SysRole;
 */
 public interface SysRoleService extends IService<SysRole> {
 
+    List<SysRoleResp> selectList();
 }

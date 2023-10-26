@@ -3,6 +3,7 @@ package com.wy.yunoa.controller;
 import com.wy.yunoa.Result.Result;
 import com.wy.yunoa.model.Resp.SysUserResp;
 import com.wy.yunoa.service.SysUserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +19,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys/user")
+@Tag(name = "用户管理")
 public class SysUserController {
 
     @Resource
     private SysUserService userService;
 
     @GetMapping("/userList")
+    @Tag(name = "获取用户列表")
     private Result<List<SysUserResp>> selectList() {
         return Result.of("用户列表",userService.getList());
     }

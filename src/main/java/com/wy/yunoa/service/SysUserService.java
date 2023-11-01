@@ -1,5 +1,7 @@
 package com.wy.yunoa.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wy.yunoa.model.DTO.SysUserQueryDTO;
 import com.wy.yunoa.model.Resp.RouterResp;
 import com.wy.yunoa.model.Resp.SysUserResp;
 import com.wy.yunoa.model.Resp.UserInfoResp;
@@ -21,4 +23,6 @@ public interface SysUserService {
     List<RouterResp> findUserMenuById(Long userId);
 
     List<String> findButtonsById(Long userId);
+
+    Page<SysUserResp> selectList(Long page, Long limit, SysUserQueryDTO sysUserQueryDTO);
 }

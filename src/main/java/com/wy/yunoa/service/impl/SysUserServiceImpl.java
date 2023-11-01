@@ -2,9 +2,11 @@ package com.wy.yunoa.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wy.yunoa.exception.CustomException;
 import com.wy.yunoa.mapper.SysMenuMapper;
+import com.wy.yunoa.model.DTO.SysUserQueryDTO;
 import com.wy.yunoa.model.Resp.MetaVo;
 import com.wy.yunoa.model.Resp.RouterResp;
 import com.wy.yunoa.model.Resp.SysUserResp;
@@ -92,6 +94,33 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 .map(SysMenu::getPerms)
                 .toList();
     }
+
+    @Override
+    public Page<SysUserResp> selectList(Long page, Long limit, SysUserQueryDTO sysUserQueryDTO) {
+        Page<SysUser> pageParam = new Page<>(page,limit);
+        LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(StringUtils.isNotEmpty(sysUserQueryDTO.getKeyword()),SysUser::getUsername,sysUserQueryDTO.getKeyword());
+        if (sysUserQueryDTO.getCreateTimeBegin() != null) {
+            wrapper.ge(SysUser::getCreateTime,sysUserQueryDTO.getCreateTimeBegin());
+        }
+        if (sysUserQueryDTO.getCreateTimeEnd() != null) {
+            wrapper.le(SysUser::getCreateTime,sysUserQueryDTO.getCreateTimeEnd());
+        }
+        List<SysUser> sysUsers = this.userMapper.selectList(pageParam, wrapper);
+        if (Optional.ofNullable(sysUsers).isEmpty()) {
+            return new Page<>();
+        }
+        List<SysUserResp> list = sysUsers.stream().map(user -> {
+            SysUserResp userResp = new SysUserResp();
+            BeanUtils.copyProperties(user, userResp);
+            return userResp;
+        }).toList();
+        Page<SysUserResp> respPage = new Page<>();
+        BeanUtils.copyProperties(pageParam,respPage);
+        respPage.setRecords(list);
+        return respPage;
+    }
+
     // 构建路由
     private List<RouterResp> buildRouter(List<SysMenu> sysMenuTreeList) {
         // 提前创建,存储最终的数据
@@ -110,6 +139,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 List<SysMenu> hiddenMenuList = children.stream()
                         .filter(childrenMenu -> StringUtils.isNotEmpty(childrenMenu.getComponent()))
                         .toList();
+                log.info("hiddenList:~~~{}",hiddenMenuList);
                 for (SysMenu hiddenMenu : hiddenMenuList) {
                     RouterResp hiddenRouter = new RouterResp();
                     hiddenRouter.setHidden(true);

@@ -1,6 +1,8 @@
 package com.wy.yunoa.service;
 
+import com.wy.yunoa.model.Resp.RouterResp;
 import com.wy.yunoa.model.Resp.SysUserResp;
+import com.wy.yunoa.model.Resp.UserInfoResp;
 import com.wy.yunoa.model.domain.SysUser;
 
 import java.util.List;
@@ -13,4 +15,10 @@ import java.util.List;
 public interface SysUserService {
 
     List<SysUserResp> getList();
+
+    SysUser getUserInfoById(Long userId);
+
+    List<RouterResp> findUserMenuById(Long userId);
+
+    List<String> findButtonsById(Long userId);
 }

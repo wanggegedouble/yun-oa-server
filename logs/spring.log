@@ -1,0 +1,110 @@
+2023-11-01T00:02:18.174+08:00  INFO 21052 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-11-01T00:02:18.186+08:00  INFO 21052 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-11-01T00:02:24.392+08:00  INFO 12464 --- [main] com.wy.yunoa.YunOaApplication            : Starting YunOaApplication using Java 17.0.9 with PID 12464 (D:\_CODE\Java\YunOA\target\classes started by huawei in D:\_CODE\Java\YunOA)
+2023-11-01T00:02:24.395+08:00  INFO 12464 --- [main] com.wy.yunoa.YunOaApplication            : The following 1 profile is active: "dev"
+2023-11-01T00:02:25.491+08:00  INFO 12464 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-11-01T00:02:25.500+08:00  INFO 12464 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-01T00:02:25.500+08:00  INFO 12464 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01T00:02:25.575+08:00  INFO 12464 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-01T00:02:25.575+08:00  INFO 12464 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1125 ms
+2023-11-01T00:02:26.951+08:00  INFO 12464 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-11-01T00:02:26.960+08:00  INFO 12464 --- [main] com.wy.yunoa.YunOaApplication            : Started YunOaApplication in 2.985 seconds (process running for 3.514)
+2023-11-01T00:02:35.274+08:00  INFO 12464 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01T00:02:35.274+08:00  INFO 12464 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-11-01T00:02:35.274+08:00  INFO 12464 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-11-01T00:03:24.196+08:00  INFO 18840 --- [main] com.wy.yunoa.YunOaApplication            : Starting YunOaApplication using Java 17.0.9 with PID 18840 (D:\_CODE\Java\YunOA\target\classes started by huawei in D:\_CODE\Java\YunOA)
+2023-11-01T00:03:24.198+08:00  INFO 18840 --- [main] com.wy.yunoa.YunOaApplication            : The following 1 profile is active: "dev"
+2023-11-01T00:03:25.221+08:00  INFO 18840 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-11-01T00:03:25.228+08:00  INFO 18840 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-01T00:03:25.228+08:00  INFO 18840 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01T00:03:25.296+08:00  INFO 18840 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-01T00:03:25.297+08:00  INFO 18840 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1047 ms
+2023-11-01T00:03:26.602+08:00  INFO 18840 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-11-01T00:03:26.610+08:00  INFO 18840 --- [main] com.wy.yunoa.YunOaApplication            : Started YunOaApplication in 2.862 seconds (process running for 3.327)
+2023-11-01T00:03:36.775+08:00  INFO 18840 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01T00:03:36.776+08:00  INFO 18840 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-11-01T00:03:36.777+08:00  INFO 18840 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-11-01T00:05:05.726+08:00  INFO 2060 --- [main] com.wy.yunoa.YunOaApplication            : Starting YunOaApplication using Java 17.0.9 with PID 2060 (D:\_CODE\Java\YunOA\target\classes started by huawei in D:\_CODE\Java\YunOA)
+2023-11-01T00:05:05.728+08:00  INFO 2060 --- [main] com.wy.yunoa.YunOaApplication            : The following 1 profile is active: "dev"
+2023-11-01T00:05:06.803+08:00  INFO 2060 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-11-01T00:05:06.810+08:00  INFO 2060 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-01T00:05:06.810+08:00  INFO 2060 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01T00:05:06.880+08:00  INFO 2060 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-01T00:05:06.881+08:00  INFO 2060 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1108 ms
+2023-11-01T00:05:08.315+08:00  INFO 2060 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-11-01T00:05:08.324+08:00  INFO 2060 --- [main] com.wy.yunoa.YunOaApplication            : Started YunOaApplication in 3.099 seconds (process running for 3.878)
+2023-11-01T00:05:28.694+08:00  INFO 2060 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01T00:05:28.694+08:00  INFO 2060 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-11-01T00:05:28.695+08:00  INFO 2060 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-11-01T00:05:40.987+08:00  INFO 9528 --- [main] com.wy.yunoa.YunOaApplication            : Starting YunOaApplication using Java 17.0.9 with PID 9528 (D:\_CODE\Java\YunOA\target\classes started by huawei in D:\_CODE\Java\YunOA)
+2023-11-01T00:05:40.990+08:00  INFO 9528 --- [main] com.wy.yunoa.YunOaApplication            : The following 1 profile is active: "dev"
+2023-11-01T00:05:42.076+08:00  INFO 9528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-11-01T00:05:42.083+08:00  INFO 9528 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-01T00:05:42.083+08:00  INFO 9528 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01T00:05:42.155+08:00  INFO 9528 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-01T00:05:42.155+08:00  INFO 9528 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1111 ms
+2023-11-01T00:05:43.911+08:00  INFO 9528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-11-01T00:05:43.932+08:00  INFO 9528 --- [main] com.wy.yunoa.YunOaApplication            : Started YunOaApplication in 3.474 seconds (process running for 4.215)
+2023-11-01T00:05:48.418+08:00  INFO 9528 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01T00:05:48.418+08:00  INFO 9528 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-11-01T00:05:48.419+08:00  INFO 9528 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-11-01T00:06:09.136+08:00  INFO 7528 --- [main] com.wy.yunoa.YunOaApplication            : Starting YunOaApplication using Java 17.0.9 with PID 7528 (D:\_CODE\Java\YunOA\target\classes started by huawei in D:\_CODE\Java\YunOA)
+2023-11-01T00:06:09.138+08:00  INFO 7528 --- [main] com.wy.yunoa.YunOaApplication            : The following 1 profile is active: "dev"
+2023-11-01T00:06:10.211+08:00  INFO 7528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-11-01T00:06:10.220+08:00  INFO 7528 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-01T00:06:10.220+08:00  INFO 7528 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01T00:06:10.296+08:00  INFO 7528 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-01T00:06:10.296+08:00  INFO 7528 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1105 ms
+2023-11-01T00:06:11.814+08:00  INFO 7528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-11-01T00:06:11.824+08:00  INFO 7528 --- [main] com.wy.yunoa.YunOaApplication            : Started YunOaApplication in 3.247 seconds (process running for 3.924)
+2023-11-01T00:06:14.989+08:00  INFO 7528 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01T00:06:14.989+08:00  INFO 7528 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-11-01T00:06:14.991+08:00  INFO 7528 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-11-01T00:07:45.836+08:00  INFO 13056 --- [main] com.wy.yunoa.YunOaApplication            : Starting YunOaApplication using Java 17.0.9 with PID 13056 (D:\_CODE\Java\YunOA\target\classes started by huawei in D:\_CODE\Java\YunOA)
+2023-11-01T00:07:45.839+08:00  INFO 13056 --- [main] com.wy.yunoa.YunOaApplication            : The following 1 profile is active: "dev"
+2023-11-01T00:07:47.005+08:00  INFO 13056 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-11-01T00:07:47.013+08:00  INFO 13056 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-01T00:07:47.014+08:00  INFO 13056 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01T00:07:47.084+08:00  INFO 13056 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-01T00:07:47.084+08:00  INFO 13056 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1180 ms
+2023-11-01T00:07:48.572+08:00  INFO 13056 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-11-01T00:07:48.582+08:00  INFO 13056 --- [main] com.wy.yunoa.YunOaApplication            : Started YunOaApplication in 3.338 seconds (process running for 4.005)
+2023-11-01T00:07:55.492+08:00  INFO 13056 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01T00:07:55.494+08:00  INFO 13056 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-11-01T00:07:55.495+08:00  INFO 13056 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-11-01T00:11:20.386+08:00  INFO 18756 --- [main] com.wy.yunoa.YunOaApplication            : Starting YunOaApplication using Java 17.0.9 with PID 18756 (D:\_CODE\Java\YunOA\target\classes started by huawei in D:\_CODE\Java\YunOA)
+2023-11-01T00:11:20.389+08:00  INFO 18756 --- [main] com.wy.yunoa.YunOaApplication            : The following 1 profile is active: "dev"
+2023-11-01T00:11:21.420+08:00  INFO 18756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-11-01T00:11:21.428+08:00  INFO 18756 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-01T00:11:21.428+08:00  INFO 18756 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01T00:11:21.498+08:00  INFO 18756 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-01T00:11:21.498+08:00  INFO 18756 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1060 ms
+2023-11-01T00:11:22.934+08:00  INFO 18756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-11-01T00:11:22.944+08:00  INFO 18756 --- [main] com.wy.yunoa.YunOaApplication            : Started YunOaApplication in 3.099 seconds (process running for 3.71)
+2023-11-01T00:11:27.639+08:00  INFO 18756 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01T00:11:27.639+08:00  INFO 18756 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-11-01T00:11:27.640+08:00  INFO 18756 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-11-01T00:15:28.380+08:00  INFO 21944 --- [main] com.wy.yunoa.YunOaApplication            : Starting YunOaApplication using Java 17.0.9 with PID 21944 (D:\_CODE\Java\YunOA\target\classes started by huawei in D:\_CODE\Java\YunOA)
+2023-11-01T00:15:28.382+08:00  INFO 21944 --- [main] com.wy.yunoa.YunOaApplication            : The following 1 profile is active: "dev"
+2023-11-01T00:15:29.442+08:00  INFO 21944 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-11-01T00:15:29.450+08:00  INFO 21944 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-01T00:15:29.450+08:00  INFO 21944 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01T00:15:29.520+08:00  INFO 21944 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-01T00:15:29.520+08:00  INFO 21944 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1091 ms
+2023-11-01T00:15:30.973+08:00  INFO 21944 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-11-01T00:15:30.981+08:00  INFO 21944 --- [main] com.wy.yunoa.YunOaApplication            : Started YunOaApplication in 3.021 seconds (process running for 3.495)
+2023-11-01T00:15:36.564+08:00  INFO 21944 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01T00:15:36.564+08:00  INFO 21944 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-11-01T00:15:36.564+08:00  INFO 21944 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-11-01T00:17:40.273+08:00  INFO 8296 --- [main] com.wy.yunoa.YunOaApplication            : Starting YunOaApplication using Java 17.0.9 with PID 8296 (D:\_CODE\Java\YunOA\target\classes started by huawei in D:\_CODE\Java\YunOA)
+2023-11-01T00:17:40.274+08:00  INFO 8296 --- [main] com.wy.yunoa.YunOaApplication            : The following 1 profile is active: "dev"
+2023-11-01T00:17:41.311+08:00  INFO 8296 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-11-01T00:17:41.318+08:00  INFO 8296 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-11-01T00:17:41.318+08:00  INFO 8296 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-01T00:17:41.387+08:00  INFO 8296 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-11-01T00:17:41.387+08:00  INFO 8296 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1067 ms
+2023-11-01T00:17:42.732+08:00  INFO 8296 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-11-01T00:17:42.741+08:00  INFO 8296 --- [main] com.wy.yunoa.YunOaApplication            : Started YunOaApplication in 2.871 seconds (process running for 3.337)
+2023-11-01T00:17:45.222+08:00  INFO 8296 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-11-01T00:17:45.222+08:00  INFO 8296 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-11-01T00:17:45.223+08:00  INFO 8296 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

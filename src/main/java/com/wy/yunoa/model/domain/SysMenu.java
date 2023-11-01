@@ -1,13 +1,16 @@
 package com.wy.yunoa.model.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 菜单表
@@ -83,4 +86,15 @@ public class SysMenu implements Serializable {
      * 删除标记（0:不可用 1:可用）
      */
     private Integer isDeleted;
+
+    /**
+     *  子菜单
+     */
+    @TableField(exist = false)
+    private List<SysMenu> children;
+    /**
+     * 是否选中
+     */
+    @TableField(exist = false)
+    private Boolean isSelect;
 }

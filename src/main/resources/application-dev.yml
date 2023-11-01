@@ -12,3 +12,6 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath*:com/wy/yunoa/mapper/*.xml
+jwt:
+  key: "wangYao"
+  expire_time: 30000

@@ -61,4 +61,9 @@ public class SysIndexController {
         map.put("buttons",permsList);
         return Result.of("info",map);
     }
+
+    @PostMapping("/logout")
+    public Result logout() {
+        return Result.of(200,"logout");
+    }
 }

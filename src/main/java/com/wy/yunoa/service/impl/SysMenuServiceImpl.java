@@ -2,6 +2,7 @@ package com.wy.yunoa.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wy.yunoa.exception.CustomException;
 import com.wy.yunoa.model.Resp.MetaVo;
 import com.wy.yunoa.model.Resp.RouterResp;
 import com.wy.yunoa.model.Resp.SysMenuResp;
@@ -18,7 +19,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -31,11 +31,12 @@ import java.util.Optional;
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
     @Resource
     private SysMenuMapper menuMapper;
+
     @Override
     public List<SysMenuResp> getList() {
         List<SysMenu> sysMenus = menuMapper.selectList(null);
         if (Optional.ofNullable(sysMenus).isEmpty()) {
-
+            throw new CustomException(400,"无数据");
         }
         return sysMenus.stream().map(menu -> {
             SysMenuResp menuResp = new SysMenuResp();

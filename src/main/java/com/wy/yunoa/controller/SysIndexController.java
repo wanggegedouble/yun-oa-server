@@ -5,6 +5,7 @@ import com.wy.yunoa.model.DTO.IndexLoginDTO;
 import com.wy.yunoa.model.Resp.RouterResp;
 import com.wy.yunoa.model.domain.SysUser;
 import com.wy.yunoa.service.SysLoginService;
+import com.wy.yunoa.service.SysMenuService;
 import com.wy.yunoa.service.SysUserService;
 import com.wy.yunoa.utils.JWT.JWTHpler;
 import jakarta.annotation.Resource;
@@ -31,6 +32,8 @@ public class SysIndexController {
     private SysLoginService loginService;
     @Resource
     private SysUserService userService;
+    @Resource
+    private SysMenuService menuService;
 
     @GetMapping("/getRouters")
     public String getRouters(){
@@ -50,9 +53,9 @@ public class SysIndexController {
         Long userId = JWTHpler.getUserId(token);
         SysUser user = this.userService.getUserInfoById(userId);
         //根据用户id查询用户菜单
-        List<RouterResp> routers = this.userService.findUserMenuById(userId);
+        List<RouterResp> routers = this.menuService.findUserMenuById(userId);
         //根据用户ID获取用户可以操作的按钮
-        List<String> permsList = this.userService.findButtonsById(userId);
+        List<String> permsList = this.menuService.findButtonsById(userId);
         Map<String,Object> map = new HashMap<>();
         map.put("roles","[admin]");
         map.put("name",user.getUsername());

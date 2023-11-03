@@ -3,9 +3,9 @@ package com.wy.yunoa.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wy.yunoa.exception.CustomException;
-import com.wy.yunoa.model.Resp.MetaVo;
-import com.wy.yunoa.model.Resp.RouterResp;
-import com.wy.yunoa.model.Resp.SysMenuResp;
+import com.wy.yunoa.model.VO.MetaVo;
+import com.wy.yunoa.model.VO.RouterVO;
+import com.wy.yunoa.model.VO.SysMenuVO;
 import com.wy.yunoa.model.domain.SysMenu;
 import com.wy.yunoa.mapper.SysMenuMapper;
 import com.wy.yunoa.service.SysMenuService;
@@ -33,22 +33,22 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     private SysMenuMapper menuMapper;
 
     @Override
-    public List<SysMenuResp> getList() {
+    public List<SysMenuVO> getList() {
         List<SysMenu> sysMenus = menuMapper.selectList(null);
         if (Optional.ofNullable(sysMenus).isEmpty()) {
             throw new CustomException(400,"无数据");
         }
         return sysMenus.stream().map(menu -> {
-            SysMenuResp menuResp = new SysMenuResp();
+            SysMenuVO menuResp = new SysMenuVO();
             BeanUtils.copyProperties(menu, menuResp);
             return menuResp;
         }).toList();
     }
 
     @Override
-    public List<RouterResp> findUserMenuById(Long userId) {
+    public List<RouterVO> findUserMenuById(Long userId) {
         // 判断用户是否是管理员 管理员直接查询说有的菜单 非管理员根据ID查询菜单
-        List<SysMenu> menuList = null;
+        List<SysMenu> menuList;
         if (userId.intValue() == 1) {
             menuList = menuMapper.selectList(Wrappers.<SysMenu>lambdaQuery()
                     .eq(SysMenu::getStatus, 1)
@@ -61,11 +61,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         return this.buildRouter(sysMenuTreeList);
     }
 
-    private List<RouterResp> buildRouter(List<SysMenu> sysMenuTreeList) {
+    private List<RouterVO> buildRouter(List<SysMenu> sysMenuTreeList) {
         // 提前创建,存储最终的数据
-        List<RouterResp> routers = new ArrayList<>();
+        List<RouterVO> routers = new ArrayList<>();
         for (SysMenu menu : sysMenuTreeList) {
-            RouterResp router = new RouterResp();
+            RouterVO router = new RouterVO();
             router.setHidden(false);
             router.setAlwaysShow(false);
             router.setPath(getRouterPath(menu));
@@ -80,7 +80,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                         .toList();
                 log.info("hiddenList:~~~{}", hiddenMenuList);
                 for (SysMenu hiddenMenu : hiddenMenuList) {
-                    RouterResp hiddenRouter = new RouterResp();
+                    RouterVO hiddenRouter = new RouterVO();
                     hiddenRouter.setHidden(true);
                     hiddenRouter.setAlwaysShow(false);
                     hiddenRouter.setPath(getRouterPath(hiddenMenu));
@@ -103,7 +103,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
     @Override
     public List<String> findButtonsById(Long userId) {
-        List<SysMenu> menuList;
+        List<SysMenu> menuList = null;
         // 如果是admin 用户直接查询
         if (userId.intValue() == 1) {
             menuList = this.menuMapper.selectList(Wrappers.<SysMenu>lambdaQuery().eq(SysMenu::getStatus,1));

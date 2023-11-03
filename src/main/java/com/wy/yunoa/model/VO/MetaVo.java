@@ -1,4 +1,4 @@
-package com.wy.yunoa.model.Resp;
+package com.wy.yunoa.model.VO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -2,7 +2,7 @@ package com.wy.yunoa.controller;
 
 import com.wy.yunoa.Result.Result;
 import com.wy.yunoa.model.DTO.IndexLoginDTO;
-import com.wy.yunoa.model.Resp.RouterResp;
+import com.wy.yunoa.model.VO.RouterVO;
 import com.wy.yunoa.model.domain.SysUser;
 import com.wy.yunoa.service.SysLoginService;
 import com.wy.yunoa.service.SysMenuService;
@@ -53,7 +53,7 @@ public class SysIndexController {
         Long userId = JWTHpler.getUserId(token);
         SysUser user = this.userService.getUserInfoById(userId);
         //根据用户id查询用户菜单
-        List<RouterResp> routers = this.menuService.findUserMenuById(userId);
+        List<RouterVO> routers = this.menuService.findUserMenuById(userId);
         //根据用户ID获取用户可以操作的按钮
         List<String> permsList = this.menuService.findButtonsById(userId);
         Map<String,Object> map = new HashMap<>();

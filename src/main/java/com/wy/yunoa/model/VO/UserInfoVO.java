@@ -1,4 +1,4 @@
-package com.wy.yunoa.model.Resp;
+package com.wy.yunoa.model.VO;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  * @Version: 1.0
  */
 @Data
-public class UserInfoResp {
+public class UserInfoVO {
     /**
      *   private String name;
      *     private String avatar;

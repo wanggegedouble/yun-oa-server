@@ -7,6 +7,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jackson:
     date-format: "yyyy-MM-dd HH:mm:ss"
+  data:
+    redis:
+      host: 47.108.180.135
+      port: 6379
+      password: admin
+      database: 0
 
 mybatis-plus:
   configuration:

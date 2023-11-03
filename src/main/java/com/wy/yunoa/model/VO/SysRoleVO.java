@@ -1,7 +1,5 @@
-package com.wy.yunoa.model.Resp;
+package com.wy.yunoa.model.VO;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,7 +11,7 @@ import java.util.Date;
  * @Version: 1.0
  */
 @Data
-public class SysRoleResp {
+public class SysRoleVO {
     /**
      * 角色id
      */

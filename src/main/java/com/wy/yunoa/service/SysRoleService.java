@@ -1,10 +1,16 @@
 package com.wy.yunoa.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.wy.yunoa.model.Resp.SysRoleResp;
+import com.wy.yunoa.model.DTO.SysAssginRoleVO;
+import com.wy.yunoa.model.DTO.SysRolePageDTO;
+import com.wy.yunoa.model.DTO.SysRoleSaveDTO;
+import com.wy.yunoa.model.VO.SysRolePageVO;
+import com.wy.yunoa.model.VO.SysRoleVO;
 import com.wy.yunoa.model.domain.SysRole;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author huawei
@@ -13,5 +19,13 @@ import java.util.List;
 */
 public interface SysRoleService extends IService<SysRole> {
 
-    List<SysRoleResp> selectList();
+    List<SysRoleVO> selectList();
+
+    Page<SysRolePageVO> selectPageList(Long page, Long limit, SysRolePageDTO sysRolePageDTO);
+
+    void saveRole(SysRoleSaveDTO sysRoleSaveDTO);
+
+    void doAssign(SysAssginRoleVO sysAssginRoleVO);
+
+    Map<String, Object> toAssign(Long userId);
 }

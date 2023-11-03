@@ -1,4 +1,4 @@
-package com.wy.yunoa.model.Resp;
+package com.wy.yunoa.model.VO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @Schema(description = "用户接口条件查询返回类")
-public class SysUserResp {
+public class SysUserVO {
     /**
      * 会员id
      */

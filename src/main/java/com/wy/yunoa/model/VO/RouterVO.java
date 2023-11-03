@@ -1,4 +1,4 @@
-package com.wy.yunoa.model.Resp;
+package com.wy.yunoa.model.VO;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @Version: 1.0
  */
 @Data
-public class RouterResp {
+public class RouterVO {
     /**
      * 路由地址
      */
@@ -40,5 +40,5 @@ public class RouterResp {
     /**
      * 子路由
      */
-    private List<RouterResp> children;
+    private List<RouterVO> children;
 }

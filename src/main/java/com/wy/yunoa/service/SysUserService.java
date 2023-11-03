@@ -2,9 +2,9 @@ package com.wy.yunoa.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wy.yunoa.model.DTO.SysUserQueryDTO;
-import com.wy.yunoa.model.Resp.RouterResp;
-import com.wy.yunoa.model.Resp.SysUserResp;
-import com.wy.yunoa.model.Resp.UserInfoResp;
+import com.wy.yunoa.model.DTO.SysUserSaveDTO;
+import com.wy.yunoa.model.VO.RouterVO;
+import com.wy.yunoa.model.VO.SysUserVO;
 import com.wy.yunoa.model.domain.SysUser;
 
 import java.util.List;
@@ -16,13 +16,21 @@ import java.util.List;
 */
 public interface SysUserService {
 
-    List<SysUserResp> getList();
+    List<SysUserVO> getList();
 
     SysUser getUserInfoById(Long userId);
 
-    List<RouterResp> findUserMenuById(Long userId);
+    List<RouterVO> findUserMenuById(Long userId);
 
     List<String> findButtonsById(Long userId);
 
-    Page<SysUserResp> selectList(Long page, Long limit, SysUserQueryDTO sysUserQueryDTO);
+    Page<SysUserVO> selectList(Long page, Long limit, SysUserQueryDTO sysUserQueryDTO);
+
+    SysUserVO getUserById(Long id);
+
+    void delUserById(Long id);
+
+    void updateStatus(Long id, Integer status);
+
+    void saveUser(SysUserSaveDTO sysUserSaveDTO);
 }

@@ -1,4 +1,4 @@
-package com.wy.yunoa.model.Resp;
+package com.wy.yunoa.model.VO;
 
 /**
  * @Author: wy
@@ -6,5 +6,5 @@ package com.wy.yunoa.model.Resp;
  * @Description: TODO
  * @Version: 1.0
  */
-public class LoginResp {
+public class LoginVO {
 }

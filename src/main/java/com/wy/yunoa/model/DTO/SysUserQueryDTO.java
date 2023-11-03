@@ -20,6 +20,8 @@ public class SysUserQueryDTO implements Serializable {
     private static final long serialVersionUID = 3653841516412031481L;
 
     private String keyword;
+
     private Date createTimeBegin;
+
     private Date createTimeEnd;
 }

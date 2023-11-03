@@ -1,7 +1,6 @@
 package com.wy.yunoa.service;
 
 import com.wy.yunoa.model.DTO.IndexLoginDTO;
-import com.wy.yunoa.model.Resp.LoginResp;
 
 /**
  * @Author: wy

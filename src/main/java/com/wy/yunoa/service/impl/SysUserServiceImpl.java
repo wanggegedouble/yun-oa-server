@@ -1,5 +1,9 @@
 package com.wy.yunoa.service.impl;
 
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.crypto.digest.DigestAlgorithm;
+import cn.hutool.crypto.digest.Digester;
+import cn.hutool.crypto.digest.MD5;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -7,9 +11,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wy.yunoa.exception.CustomException;
 import com.wy.yunoa.mapper.SysMenuMapper;
 import com.wy.yunoa.model.DTO.SysUserQueryDTO;
-import com.wy.yunoa.model.Resp.MetaVo;
-import com.wy.yunoa.model.Resp.RouterResp;
-import com.wy.yunoa.model.Resp.SysUserResp;
+import com.wy.yunoa.model.DTO.SysUserSaveDTO;
+import com.wy.yunoa.model.VO.MetaVo;
+import com.wy.yunoa.model.VO.RouterVO;
+import com.wy.yunoa.model.VO.SysUserVO;
 import com.wy.yunoa.model.domain.SysMenu;
 import com.wy.yunoa.model.domain.SysUser;
 import com.wy.yunoa.mapper.SysUserMapper;
@@ -20,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -39,13 +45,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysMenuMapper menuMapper;
 
     @Override
-    public List<SysUserResp> getList() {
+    public List<SysUserVO> getList() {
         List<SysUser> sysUsers = userMapper.selectList(null);
         if (Optional.ofNullable(sysUsers).isEmpty()) {
             throw new CustomException(400,"无数据");
         }
         return sysUsers.stream().map(user -> {
-            SysUserResp resp = new SysUserResp();
+            SysUserVO resp = new SysUserVO();
             BeanUtils.copyProperties(user, resp);
             return resp;
         }).toList();
@@ -64,7 +70,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     根据用户id查询用户菜单
      */
     @Override
-    public List<RouterResp> findUserMenuById(Long userId) {
+    public List<RouterVO> findUserMenuById(Long userId) {
         // 判断用户是否是管理员 管理员直接查询说有的菜单 非管理员根据ID查询菜单
         List<SysMenu> menuList = null;
         if (userId.intValue() == 1) {
@@ -96,7 +102,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public Page<SysUserResp> selectList(Long page, Long limit, SysUserQueryDTO sysUserQueryDTO) {
+    public Page<SysUserVO> selectList(Long page, Long limit, SysUserQueryDTO sysUserQueryDTO) {
         Page<SysUser> pageParam = new Page<>(page,limit);
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(StringUtils.isNotEmpty(sysUserQueryDTO.getKeyword()),SysUser::getUsername,sysUserQueryDTO.getKeyword());
@@ -106,27 +112,84 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (sysUserQueryDTO.getCreateTimeEnd() != null) {
             wrapper.le(SysUser::getCreateTime,sysUserQueryDTO.getCreateTimeEnd());
         }
-        List<SysUser> sysUsers = this.userMapper.selectList(pageParam, wrapper);
-        if (Optional.ofNullable(sysUsers).isEmpty()) {
+        Page<SysUser> sysUserPage = this.userMapper.selectPage(pageParam, wrapper);
+        List<SysUser> records = sysUserPage.getRecords();
+        if (Optional.ofNullable(records).isEmpty()) {
             return new Page<>();
         }
-        List<SysUserResp> list = sysUsers.stream().map(user -> {
-            SysUserResp userResp = new SysUserResp();
+        List<SysUserVO> list = records.stream().map(user -> {
+            SysUserVO userResp = new SysUserVO();
             BeanUtils.copyProperties(user, userResp);
             return userResp;
         }).toList();
-        Page<SysUserResp> respPage = new Page<>();
-        BeanUtils.copyProperties(pageParam,respPage);
+        Page<SysUserVO> respPage = new Page<>();
+        BeanUtils.copyProperties(sysUserPage,respPage);
         respPage.setRecords(list);
+        log.info("total~~~~~~~~~~~~~~~:{}",sysUserPage.getTotal());
         return respPage;
     }
 
+    /**
+     *  根据Id获取用户信息
+     */
+    @Override
+    public SysUserVO getUserById(Long id) {
+        LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
+        SysUser sysUser = this.userMapper.selectById(id);
+        wrapper.eq(SysUser::getStatus,true);
+        if (Optional.ofNullable(sysUser).isEmpty()){
+            throw new CustomException(400,"无此用户");
+        }
+        SysUserVO userVO = new SysUserVO();
+        BeanUtils.copyProperties(sysUser,userVO);
+        return userVO;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delUserById(Long id) {
+        SysUser sysUser = this.userMapper.selectById(id);
+        if (Optional.ofNullable(sysUser).isEmpty()) {
+            throw new CustomException(400,"用户不存在");
+        }
+        int i = this.userMapper.deleteById(sysUser);
+        if (i != 1) {
+            throw new CustomException(500,"删除失败");
+        }
+    }
+
+    @Override
+    public void updateStatus(Long id, Integer status) {
+        SysUser sysUser = this.userMapper.selectById(id);
+        if (Optional.ofNullable(sysUser).isEmpty()) {
+            throw new CustomException(400,"无此用户");
+        }
+        sysUser.setStatus(status);
+        int i = this.userMapper.updateById(sysUser);
+        if (i != 1) {
+            throw new CustomException(500,"更新失败");
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void saveUser(SysUserSaveDTO sysUserSaveDTO) {
+        SysUser user = new SysUser();
+        BeanUtils.copyProperties(sysUserSaveDTO,user);
+        Digester md5 = new Digester(DigestAlgorithm.MD5);
+        user.setPassword( md5.digestHex(user.getPassword()));
+        int insert = this.userMapper.insert(user);
+        if (insert != 1){
+            throw new CustomException(500,"添加失败");
+        }
+    }
+
     // 构建路由
-    private List<RouterResp> buildRouter(List<SysMenu> sysMenuTreeList) {
+    private List<RouterVO> buildRouter(List<SysMenu> sysMenuTreeList) {
         // 提前创建,存储最终的数据
-        List<RouterResp> routers = new ArrayList<>();
+        List<RouterVO> routers = new ArrayList<>();
         for (SysMenu menu : sysMenuTreeList) {
-            RouterResp router = new RouterResp();
+            RouterVO router = new RouterVO();
             router.setHidden(false);
             router.setAlwaysShow(false);
             router.setPath(getRouterPath(menu));
@@ -141,7 +204,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                         .toList();
                 log.info("hiddenList:~~~{}",hiddenMenuList);
                 for (SysMenu hiddenMenu : hiddenMenuList) {
-                    RouterResp hiddenRouter = new RouterResp();
+                    RouterVO hiddenRouter = new RouterVO();
                     hiddenRouter.setHidden(true);
                     hiddenRouter.setAlwaysShow(false);
                     hiddenRouter.setPath(getRouterPath(hiddenMenu));

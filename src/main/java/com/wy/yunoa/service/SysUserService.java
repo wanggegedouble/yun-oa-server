@@ -33,4 +33,6 @@ public interface SysUserService {
     void updateStatus(Long id, Integer status);
 
     void saveUser(SysUserSaveDTO sysUserSaveDTO);
+
+    SysUser findUserByUsername(String username);
 }

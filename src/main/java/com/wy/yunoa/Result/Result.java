@@ -26,6 +26,9 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> of(Integer code,String message) {
         return new Result<>(code,message);
     }
+    public static <T> Result<T> of(ResultCodeEnum resultCodeEnum,T data) {
+        return new Result<>(resultCodeEnum.getMessage(), data);
+    }
 
     // 成功
     public Result(String message,T data) {
@@ -38,6 +41,12 @@ public class Result<T> implements Serializable {
     public Result(Integer code,String message) {
         this.code = code;
         this.message = message;
+    }
+
+    public Result(ResultCodeEnum resultCodeEnum,T data) {
+        this.code = resultCodeEnum.getValue();
+        this.message = resultCodeEnum.getMessage();
+        this.setData(data);
     }
 
 }

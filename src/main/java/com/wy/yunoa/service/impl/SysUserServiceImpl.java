@@ -184,6 +184,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         }
     }
 
+    @Override
+    public SysUser findUserByUsername(String username) {
+        return this.userMapper.selectOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUsername, username));
+    }
+
     // 构建路由
     private List<RouterVO> buildRouter(List<SysMenu> sysMenuTreeList) {
         // 提前创建,存储最终的数据

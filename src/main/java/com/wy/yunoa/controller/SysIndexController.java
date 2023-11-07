@@ -69,4 +69,9 @@ public class SysIndexController {
     public Result logout() {
         return Result.of(200,"logout");
     }
+
+    @GetMapping("/logout2")
+    public Result logout2() {
+        return Result.of(200,"logout");
+    }
 }

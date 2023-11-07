@@ -11,7 +11,8 @@ import lombok.Getter;
 @Getter
 public enum ResultCodeEnum {
 
-    SUCCESS(200,"请求成功");
+    SUCCESS(200,"请求成功"),
+    LOG_ERROR(500,"登录失败");
 
     private final int value;
     private final String message;

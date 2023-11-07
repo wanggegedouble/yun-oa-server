@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.wy.yunoa.model.DTO.SysAssginRoleVO;
 import com.wy.yunoa.model.DTO.SysRolePageDTO;
 import com.wy.yunoa.model.DTO.SysRoleSaveDTO;
+import com.wy.yunoa.model.DTO.SysRoleUpdateDTO;
 import com.wy.yunoa.model.VO.SysRolePageVO;
 import com.wy.yunoa.model.VO.SysRoleVO;
 import com.wy.yunoa.model.domain.SysRole;
@@ -17,7 +18,7 @@ import java.util.Map;
 * @description 针对表【sys_role(角色)】的数据库操作Service
 * @createDate 2023-10-22 00:17:50
 */
-public interface SysRoleService extends IService<SysRole> {
+public interface SysRoleService  {
 
     List<SysRoleVO> selectList();
 
@@ -28,4 +29,10 @@ public interface SysRoleService extends IService<SysRole> {
     void doAssign(SysAssginRoleVO sysAssginRoleVO);
 
     Map<String, Object> toAssign(Long userId);
+
+    void updateRole(SysRoleUpdateDTO updateDTO);
+
+    void removeById(Long id);
+
+    void batchRemove(List<Long> idList);
 }

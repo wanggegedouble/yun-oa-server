@@ -33,16 +33,34 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     private SysMenuMapper menuMapper;
 
     @Override
-    public List<SysMenuVO> getList() {
+    public List<SysMenuVO> getMenuList() {
         List<SysMenu> sysMenus = menuMapper.selectList(null);
         if (Optional.ofNullable(sysMenus).isEmpty()) {
             throw new CustomException(400,"无数据");
         }
-        return sysMenus.stream().map(menu -> {
-            SysMenuVO menuResp = new SysMenuVO();
-            BeanUtils.copyProperties(menu, menuResp);
-            return menuResp;
-        }).toList();
+        List<SysMenu> menuTree = MenuHelper.buildTree(sysMenus);
+        // 加载成前端需要的VO类
+        List<SysMenuVO> menuVOList = new ArrayList<>();
+        for (SysMenu menu : menuTree) {
+            SysMenuVO sysMenuVO = this.convertNodeToVO(menu);
+            menuVOList.add(sysMenuVO);
+        }
+        return menuVOList;
+    }
+
+    public SysMenuVO convertNodeToVO(SysMenu menu) {
+        SysMenuVO sysMenuVO = new SysMenuVO();
+        BeanUtils.copyProperties(menu,sysMenuVO);
+        List<SysMenu> children = menu.getChildren();
+        if (children != null && !children.isEmpty()) {
+            List<SysMenuVO> childVOList = new ArrayList<>();
+            for (SysMenu child : children) {
+                SysMenuVO childVO = convertNodeToVO(child);
+                childVOList.add(childVO);
+            }
+            sysMenuVO.setChildren(childVOList);
+        }
+        return sysMenuVO;
     }
 
     @Override
@@ -67,7 +85,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         for (SysMenu menu : sysMenuTreeList) {
             RouterVO router = new RouterVO();
             router.setHidden(false);
-            router.setAlwaysShow(false);
+            router.setAlwaysShow(true);
             router.setPath(getRouterPath(menu));
             router.setComponent(menu.getComponent());
             router.setMeta(new MetaVo(menu.getName(), menu.getIcon()));
@@ -75,6 +93,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             List<SysMenu> children = menu.getChildren();
             //type == 1 为菜单
             if (menu.getType() == 1) {
+                //获取type == 1 需要隐藏的子路由
                 List<SysMenu> hiddenMenuList = children.stream()
                         .filter(childrenMenu -> StringUtils.isNotEmpty(childrenMenu.getComponent()))
                         .toList();
@@ -89,6 +108,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                     routers.add(hiddenRouter);
                 }
             } else {
+                // type !== 1
                 if (!CollectionUtils.isEmpty(children)) {
                     if (children.size() > 0) {
                         router.setAlwaysShow(true);
@@ -98,6 +118,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             }
             routers.add(router);
         }
+        log.info("routers!!!!!{}",routers);
         return routers;
     }
 
@@ -115,6 +136,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 .filter(menu->menu.getType() == 2)
                 .map(SysMenu::getPerms)
                 .toList();
+    }
+
+    @Override
+    public List<SysMenu> find() {
+
+        List<SysMenu> sysMenus = this.menuMapper.selectList(Wrappers.<SysMenu>lambdaQuery().eq(SysMenu::getStatus, 1));
+        return MenuHelper.buildTree(sysMenus);
     }
 
     private String getRouterPath(SysMenu menu) {

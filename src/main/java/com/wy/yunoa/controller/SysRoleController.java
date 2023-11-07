@@ -5,6 +5,7 @@ import com.wy.yunoa.Result.Result;
 import com.wy.yunoa.model.DTO.SysAssginRoleVO;
 import com.wy.yunoa.model.DTO.SysRolePageDTO;
 import com.wy.yunoa.model.DTO.SysRoleSaveDTO;
+import com.wy.yunoa.model.DTO.SysRoleUpdateDTO;
 import com.wy.yunoa.model.VO.SysRolePageVO;
 import com.wy.yunoa.model.VO.SysRoleVO;
 import com.wy.yunoa.service.SysRoleService;
@@ -64,4 +65,24 @@ public class SysRoleController {
         return Result.of("获取角色成功",this.roleService.toAssign(userId));
     }
 
+    @Operation(summary = "修改角色")
+    @PutMapping("update")
+    public Result updateRole(@RequestBody SysRoleUpdateDTO updateDTO) {
+        this.roleService.updateRole(updateDTO);
+        return Result.of(200,"修改成功");
+    }
+
+    @Operation(summary = "删除角色",description = "根据Id删除")
+    @DeleteMapping("remove/{id}")
+    public Result removeById(@PathVariable Long id) {
+        this.roleService.removeById(id);
+        return Result.of(200,"删除成功");
+    }
+
+    @Operation(summary = "批量删除")
+    @DeleteMapping("batchRemove")
+    public Result batchRemove(@RequestBody List<Long> idList) {
+        this.roleService.batchRemove(idList);
+        return Result.of(200,"删除成功");
+    }
 }

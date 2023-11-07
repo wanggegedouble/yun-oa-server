@@ -3,6 +3,7 @@ package com.wy.yunoa.model.VO;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: wy
@@ -67,8 +68,6 @@ public class SysMenuVO {
      */
     private Date createTime;
 
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
+
+    private List<SysMenuVO> children;
 }

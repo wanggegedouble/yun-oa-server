@@ -1,6 +1,7 @@
 package com.wy.yunoa.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wy.yunoa.exception.CustomException;
@@ -8,12 +9,15 @@ import com.wy.yunoa.mapper.SysUserRoleMapper;
 import com.wy.yunoa.model.DTO.SysAssginRoleVO;
 import com.wy.yunoa.model.DTO.SysRolePageDTO;
 import com.wy.yunoa.model.DTO.SysRoleSaveDTO;
+import com.wy.yunoa.model.DTO.SysRoleUpdateDTO;
 import com.wy.yunoa.model.VO.SysRolePageVO;
 import com.wy.yunoa.model.VO.SysRoleVO;
+import com.wy.yunoa.model.VO.SysRole_id_name;
 import com.wy.yunoa.model.domain.SysRole;
 import com.wy.yunoa.mapper.SysRoleMapper;
 import com.wy.yunoa.model.domain.SysUserRole;
 import com.wy.yunoa.service.SysRoleService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -115,14 +119,58 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     public Map<String, Object> toAssign(Long userId) {
         Map<String,Object> map = new HashMap<>();
         // 查询所有角色
-        List<SysUserRole> allRoleList = this.userRoleMapper.selectList(null);
+        List<SysRole> allRoles = this.roleMapper.selectList(null);
+        List<SysRole_id_name> allRoleList = allRoles.stream().map(sysRole -> {
+            SysRole_id_name resp = new SysRole_id_name();
+            resp.setId(sysRole.getId());
+            resp.setRoleName(sysRole.getRoleName());
+            return resp;
+        }).toList();
         map.put("allRoleList",allRoleList);
-        // 查询用户角色
-        LambdaQueryWrapper<SysUserRole> userRoleWrapper = new LambdaQueryWrapper<>();
-        userRoleWrapper.eq(SysUserRole::getUserId,userId);
-        List<SysUserRole> userRoleList = this.userRoleMapper.selectList(userRoleWrapper);
-        map.put("userRoleList",userRoleList);
+        // 查询用户拥有角色
+        List<SysUserRole> sysUserRoles = this.userRoleMapper.selectList(Wrappers.<SysUserRole>lambdaQuery().eq(SysUserRole::getUserId, userId));
+        List<Long> existIdList = sysUserRoles.stream().map(SysUserRole::getRoleId).toList();
+        List<SysRole_id_name> assignRoleList = allRoleList.stream()
+                .filter(role -> existIdList.contains(role.getId()))
+                .map(role -> new SysRole_id_name(role.getId(), role.getRoleName()))
+                .toList();
+        map.put("assignRoleList",assignRoleList);
         return map ;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateRole(SysRoleUpdateDTO updateDTO) {
+        SysRole sysRole = this.roleMapper.selectById(updateDTO.getId());
+        if (Optional.ofNullable(sysRole).isEmpty()) {
+            throw new CustomException(400,"无此角色");
+        }
+        SysRole sysRolePO = new SysRole();
+        BeanUtils.copyProperties(updateDTO,sysRolePO);
+        int insert = roleMapper.insert(sysRolePO);
+        if (insert != 1) {
+            throw new CustomException(500,"更新失败");
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void removeById(Long id) {
+        SysRole sysRole = this.roleMapper.selectById(id);
+        if (Optional.ofNullable(sysRole).isEmpty()) {
+            throw new CustomException(400,"删除失败");
+        }
+        int delete = this.roleMapper.deleteById(sysRole);
+        if (delete != 1) {
+            throw new CustomException(500,"删除失败");
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void batchRemove(List<Long> idList) {
+        int i = this.roleMapper.deleteBatchIds(idList);
+        log.info("i~~~~~~~{}",i);
     }
 }
 

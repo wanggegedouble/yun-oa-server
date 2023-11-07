@@ -2,7 +2,9 @@ package com.wy.yunoa.controller;
 
 import com.wy.yunoa.Result.Result;
 import com.wy.yunoa.model.VO.SysMenuVO;
+import com.wy.yunoa.model.domain.SysMenu;
 import com.wy.yunoa.service.SysMenuService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +20,22 @@ import java.util.List;
  * @Version: 1.0
  */
 @RestController
-@RequestMapping("/sys/menu")
+@RequestMapping("/admin/system/sysMenu")
 @Tag(name = "菜单管理")
 public class SysMenuController {
     @Resource
     private SysMenuService menuService;
 
-    @GetMapping("/list")
-    @Tag(name = "获取菜单列表")
-    public Result<List<SysMenuVO>> getList() {
-        return Result.of("获取菜单列表成功",menuService.getList());
+    @GetMapping("findNodes")
+    @Operation(summary= "获取菜单列表")
+    public Result<List<SysMenuVO>> getMenuList() {
+        return Result.of("获取菜单列表成功",this.menuService.getMenuList());
     }
+
+    @GetMapping("findMenuByd")
+    @Operation(summary = "测试")
+    public Result<List<SysMenu>> findMenuById() {
+        return Result.of("data",this.menuService.find());
+    }
+
 }

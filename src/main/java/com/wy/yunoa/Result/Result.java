@@ -34,8 +34,7 @@ public class Result<T> implements Serializable {
     public Result(String message,T data) {
         this.code = ResultCodeEnum.SUCCESS.getValue();
         this.data = data;
-        this.setData(data);
-        this.setMessage(message);
+        this.message = message;
     }
     // 失败
     public Result(Integer code,String message) {
@@ -46,7 +45,7 @@ public class Result<T> implements Serializable {
     public Result(ResultCodeEnum resultCodeEnum,T data) {
         this.code = resultCodeEnum.getValue();
         this.message = resultCodeEnum.getMessage();
-        this.setData(data);
+        this.data = data;
     }
 
 }

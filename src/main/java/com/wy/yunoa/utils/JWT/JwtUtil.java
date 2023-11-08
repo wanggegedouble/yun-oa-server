@@ -23,7 +23,7 @@ public class JwtUtil {
     private final static String SUBJECT = "AUTH-USER";
     public static final int ACCESS_EXPIRE = 60;
     private final static String JWT_ISS = "wy";
-    private final static String SECRET = "com.wy.yunoa";
+    private final static String SECRET = "com.wy.yunoa::wangyao::hk::qulanlan::zh";
     public static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
     // 加密算法
     private final static SecureDigestAlgorithm<SecretKey, SecretKey> ALGORITHM = Jwts.SIG.HS256;

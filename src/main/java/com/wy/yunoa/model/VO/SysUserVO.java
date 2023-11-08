@@ -27,12 +27,6 @@ public class SysUserVO {
     private String username;
 
     /**
-     * 密码
-     */
-    @Schema(description = "密码")
-    private String password;
-
-    /**
      * 姓名
      */
     @Schema(description = "用户名")

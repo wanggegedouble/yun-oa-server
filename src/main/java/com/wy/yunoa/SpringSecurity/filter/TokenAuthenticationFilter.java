@@ -3,9 +3,12 @@ package com.wy.yunoa.SpringSecurity.filter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wy.yunoa.Result.ResponseResult;
 import com.wy.yunoa.Result.Result;
 import com.wy.yunoa.Result.ResultCodeEnum;
+import com.wy.yunoa.exception.CustomException;
 import com.wy.yunoa.utils.JWT.JwtUtil;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -48,39 +51,43 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             log.info("登录接口~~~~~~~~~~~~~~~~~~~");
             filterChain.doFilter(request,response);
         }
-        UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(request);
-        if (Optional.ofNullable(authenticationToken).isPresent()) {
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            filterChain.doFilter(request,response);
-        }else {
-            log.info("认证失败");
-            response.setStatus(HttpStatus.OK.value());
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(response.getWriter(), Result.of(ResultCodeEnum.LOG_ERROR,null));
+        try {
+            UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(request);
+            if (Optional.ofNullable(authenticationToken).isEmpty()) {
+                log.info("认证失败");
+                ResponseResult.of(response,Result.of(ResultCodeEnum.NO_AUTHENTICATION,null));
+            }else {
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                filterChain.doFilter(request,response);
+            }
+        } catch (Exception e) {
+            ResponseResult.of(response,Result.of(ResultCodeEnum.NO_AUTHENTICATION,null));
         }
     }
 
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) throws JsonProcessingException {
+    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) throws CustomException,Exception {
         String token = request.getHeader("token");
         if (StringUtils.isNotEmpty(token)) {
-            String username = JwtUtil.getUsername(token);
-            if (StringUtils.isNotEmpty(username)) {
-                String permsList = (String)redisTemplate.opsForValue().get(username);
-                if (StringUtils.isNotEmpty(permsList)) {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    List<Map<String, Object>> maps = objectMapper.readValue(permsList, new TypeReference<>() {});
-                    log.info("maps~~~~~~~~~~~{}",maps);
-                    List<SimpleGrantedAuthority> authorityList = maps.stream().map(item -> {
-                        String authority = (String) item.get("authority");
-                        return new SimpleGrantedAuthority(authority);
-                    }).toList();
-                    return new UsernamePasswordAuthenticationToken(username,null,authorityList);
-                } else {
-                    return new UsernamePasswordAuthenticationToken(username,null, Collections.emptyList());
+            try {
+                String username = JwtUtil.getUsername(token);
+                if (StringUtils.isNotEmpty(username)) {
+                    String permsList = (String)redisTemplate.opsForValue().get(username);
+                    if (StringUtils.isNotEmpty(permsList)) {
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        List<Map<String, Object>> maps = objectMapper.readValue(permsList, new TypeReference<>() {});
+                        log.info("maps~~~~~~~~~~~{}",maps);
+                        List<SimpleGrantedAuthority> authorityList = maps.stream().map(item -> {
+                            String authority = (String) item.get("authority");
+                            return new SimpleGrantedAuthority(authority);
+                        }).toList();
+                        return new UsernamePasswordAuthenticationToken(username,null,authorityList);
+                    } else {
+                        return new UsernamePasswordAuthenticationToken(username,null, Collections.emptyList());
+                    }
                 }
+            } catch (ExpiredJwtException e) {
+                throw new CustomException(500,"token过期");
             }
-
         }
         return null;
     }

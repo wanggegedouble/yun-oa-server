@@ -1,6 +1,7 @@
 package com.wy.yunoa.SpringSecurity.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wy.yunoa.Result.ResponseResult;
 import com.wy.yunoa.Result.Result;
 import com.wy.yunoa.Result.ResultCodeEnum;
 import com.wy.yunoa.SpringSecurity.userDetails.CustomUser;
@@ -63,19 +64,13 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         redisTemplate.opsForValue().set(customUser.getSysUser().getUsername(),auth);
         Map<String,Object> map = new HashMap<>();
         map.put("token",token);
-        response.setStatus(HttpStatus.OK.value());
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        objectMapper.writeValue(response.getWriter(),Result.of("token",map));
+        ResponseResult.of(response,Result.of("token",map));
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request,
                                               HttpServletResponse response,
                                               AuthenticationException failed) throws IOException {
-        response.setStatus(HttpStatus.OK.value());
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        ObjectMapper objectMapper = new ObjectMapper();
-        String message = failed.getMessage();
-        objectMapper.writeValue(response.getWriter(),Result.of(ResultCodeEnum.LOG_ERROR,message));
+        ResponseResult.of(response,Result.of(ResultCodeEnum.LOG_ERROR,failed.getMessage()));
     }
 }

@@ -1,11 +1,8 @@
 package com.wy.yunoa.service.impl;
 
 
-import com.wy.yunoa.model.Stu;
-import com.wy.yunoa.utils.JWT.JwtUtil;
-import io.jsonwebtoken.Claims;
+import com.wy.yunoa.utils.JwtUtil;
 import lombok.Data;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 /**

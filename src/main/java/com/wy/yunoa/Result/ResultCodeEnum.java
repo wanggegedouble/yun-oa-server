@@ -13,7 +13,8 @@ public enum ResultCodeEnum {
 
     SUCCESS(200,"请求成功"),
     LOG_ERROR(500,"登录失败"),
-    NO_AUTHENTICATION(501,"认证失败");
+    NO_AUTHENTICATION(501,"认证失败"),
+    JACKSON_ERROR(502,"序列化失败");
 
     private final int value;
     private final String message;

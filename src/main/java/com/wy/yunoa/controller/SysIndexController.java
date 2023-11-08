@@ -7,7 +7,7 @@ import com.wy.yunoa.model.domain.SysUser;
 import com.wy.yunoa.service.SysLoginService;
 import com.wy.yunoa.service.SysMenuService;
 import com.wy.yunoa.service.SysUserService;
-import com.wy.yunoa.utils.JWT.JwtUtil;
+import com.wy.yunoa.utils.JwtUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

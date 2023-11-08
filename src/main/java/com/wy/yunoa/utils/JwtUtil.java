@@ -1,12 +1,10 @@
-package com.wy.yunoa.utils.JWT;
+package com.wy.yunoa.utils;
 
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwsHeader;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecureDigestAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.crypto.SecretKey;
 import java.time.Instant;
@@ -16,9 +14,10 @@ import java.util.UUID;
 /**
  * @Author: wy
  * @CreateTime: 2023-11-08  16:35
- * @Description: TODO
+ * @Description: Jwt 工具类
  * @Version: 1.0
  */
+@Slf4j
 public class JwtUtil {
     private final static String SUBJECT = "AUTH-USER";
     public static final int ACCESS_EXPIRE = 60;
@@ -57,22 +56,27 @@ public class JwtUtil {
                 .build()
                 .parseSignedClaims(token);
     }
-    public static JwsHeader parseHeader(String token) {
-        return parseClaim(token).getHeader();
-    }
-
-    public static Claims parsePayload(String token) {
-        return parseClaim(token).getPayload();
-    }
 
     public static Long getUserId(String token) {
-        Claims payload = parseClaim(token).getPayload();
-        return payload.get("userId", Long.class);
+        Long userId;
+        try{
+            userId = parseClaim(token).getPayload().get("userId", Long.class);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            return null;
+        }
+        return userId;
     }
 
     public static String getUsername(String token) {
-        return parseClaim(token).getPayload().get("username",String.class);
+        String username;
+        try{
+             username = parseClaim(token).getPayload().get("username", String.class);
+         } catch (Exception e) {
+            log.info(e.getMessage());
+             return null;
+         }
+        return username;
     }
 
 }
-

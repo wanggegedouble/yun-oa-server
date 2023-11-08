@@ -7,7 +7,7 @@ import com.wy.yunoa.model.domain.SysUser;
 import com.wy.yunoa.service.SysLoginService;
 import com.wy.yunoa.service.SysMenuService;
 import com.wy.yunoa.service.SysUserService;
-import com.wy.yunoa.utils.JWT.JWTHpler;
+import com.wy.yunoa.utils.JWT.JwtUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +50,7 @@ public class SysIndexController {
     @GetMapping("/info")
     public Result getInfo(HttpServletRequest request){
         String token = request.getHeader("token");
-        Long userId = JWTHpler.getUserId(token);
+        Long userId = JwtUtil.getUserId(token);
         SysUser user = this.userService.getUserInfoById(userId);
         //根据用户id查询用户菜单
         List<RouterVO> routers = this.menuService.findUserMenuById(userId);

@@ -5,7 +5,7 @@ import com.wy.yunoa.Result.Result;
 import com.wy.yunoa.Result.ResultCodeEnum;
 import com.wy.yunoa.SpringSecurity.userDetails.CustomUser;
 import com.wy.yunoa.model.DTO.IndexLoginDTO;
-import com.wy.yunoa.utils.JWT.JWTHpler;
+import com.wy.yunoa.utils.JWT.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,11 +32,11 @@ import java.util.Map;
  */
 public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
 
-    private  RedisTemplate<String,Object> redisTemplate;
+    private final RedisTemplate<String,Object> redisTemplate;
 
     public TokenLoginFilter(AuthenticationManager authenticationManager, RedisTemplate<String,Object> redisTemplate) {
         this.setAuthenticationManager(authenticationManager);
-        this.setPostOnly(false);
+        this.setPostOnly(true);
         this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/system/index/login","POST"));
         this.redisTemplate = redisTemplate;
     }
@@ -56,9 +55,9 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
                                             FilterChain chain,
-                                            Authentication authResult) throws IOException, ServletException {
+                                            Authentication authResult) throws IOException {
         CustomUser customUser = (CustomUser)authResult.getPrincipal();
-        String token = JWTHpler.createToken(customUser.getSysUser().getId(), customUser.getSysUser().getUsername());
+        String token = JwtUtil.createToken(customUser.getSysUser().getId(), customUser.getSysUser().getUsername());
         ObjectMapper objectMapper = new ObjectMapper();
         String auth = objectMapper.writeValueAsString(customUser.getAuthorities());
         redisTemplate.opsForValue().set(customUser.getSysUser().getUsername(),auth);
@@ -72,7 +71,7 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request,
                                               HttpServletResponse response,
-                                              AuthenticationException failed) throws IOException, ServletException {
+                                              AuthenticationException failed) throws IOException {
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         ObjectMapper objectMapper = new ObjectMapper();

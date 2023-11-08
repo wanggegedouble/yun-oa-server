@@ -1,16 +1,10 @@
 package com.wy.yunoa.service.impl;
 
-import cn.hutool.json.JSON;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
-import cn.hutool.jwt.JWTPayload;
-import cn.hutool.jwt.JWTUtil;
+
 import com.wy.yunoa.model.Stu;
 import lombok.Data;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Author: wy
@@ -28,6 +22,10 @@ public class JWT {
 //        System.out.println(jsonArray);
         Stu stu = new Stu("wy",12);
         stu.show();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encode = encoder.encode("111111");
+        System.out.println(encode);
+        System.out.println(encoder.matches("111111", encode));
     }
 }
 

@@ -10,9 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +31,6 @@ public class SysUserController {
     private SysUserService userService;
 
     @GetMapping("/userList")
-    @Tag(name = "获取用户列表")
     @Operation(summary = "获取用户列表")
     private Result<List<SysUserVO>> selectList() {
         return Result.of("用户列表",userService.getList());
@@ -46,6 +43,12 @@ public class SysUserController {
                                               SysUserQueryDTO sysUserQueryDTO) {
         log.info("{} {}",page,limit);
         return Result.of("查询成功",this.userService.selectList(page,limit,sysUserQueryDTO));
+    }
+
+    @GetMapping("/test")
+    public Result<String> selectVoList(SysUserQueryDTO sysUserQueryDTO) {
+        log.info("sysUserQueryDTO~~~~~~~~~~~~~{}",sysUserQueryDTO);
+        return Result.of(200,"aa");
     }
 
     @GetMapping("/get/{id}")

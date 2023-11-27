@@ -4,7 +4,7 @@ import cn.hutool.jwt.JWTUtil;
 import com.wy.yunoa.service.HelloService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@SpringBootTest
 @Slf4j
+@SpringBootTest
 public class YunOaApplicationTests {
 
     @Resource(name = "helloServiceA")
@@ -23,8 +23,9 @@ public class YunOaApplicationTests {
     private String key;
     @Value("${jwt.expire_time}")
     private Long expire_time;
+
     @Test
-    void contextLoads() {
+    public void contextLoads() {
         helloService.sayHello();
     }
 

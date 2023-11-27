@@ -10,8 +10,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Main {
     public static void main(String[] args) {
-        String str = null;
-        boolean empty = StringUtils.isEmpty(str);
-        System.out.println(empty);
+        String hello = StringUtils.abbreviate("hello", 6);
+        int length = hello.length();
+        System.out.println(hello);
+        System.out.println(length);
     }
 }

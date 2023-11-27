@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 
 /**
@@ -37,6 +38,8 @@ public class SecurityConfig {
     private AuthenticationConfiguration authenticationConfiguration;
     @Resource
     private UserDetailsService userDetailsService;
+    @Resource
+    private LogoutHandler logoutHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -49,6 +52,7 @@ public class SecurityConfig {
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable);
+        http.logout(logout-> logout.logoutUrl("/admin/system/index/login").addLogoutHandler(logoutHandler));
         return http.build();
     }
 

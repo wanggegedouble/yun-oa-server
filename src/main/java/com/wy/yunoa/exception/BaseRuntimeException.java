@@ -12,6 +12,7 @@ import java.io.Serial;
  * @Description: TODO
  * @Version: 1.0
  */
+@Getter
 public class BaseRuntimeException extends RuntimeException{
     @Serial
     private static final long serialVersionUID = 2650129896289456984L;
@@ -21,10 +22,6 @@ public class BaseRuntimeException extends RuntimeException{
     public BaseRuntimeException(Integer errorCode,String message) {
         super(message);
         this.errorCode = errorCode;
-    }
-
-    public Integer getErrorCode() {
-        return this.errorCode;
     }
 
     public void setErrorCode(Integer errorCode) {

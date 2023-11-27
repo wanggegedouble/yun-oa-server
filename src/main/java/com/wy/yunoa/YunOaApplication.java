@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.wy.yunoa.mapper")
+
+
 public class YunOaApplication {
 
     public static void main(String[] args) {
